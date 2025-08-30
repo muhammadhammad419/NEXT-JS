@@ -1,0 +1,41 @@
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { CartProvider } from '../context/CartContext';
+import { AuthProvider } from '../context/AuthContext';
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: "Commerce Store",
+  description: "A modern e-commerce store built with Next.js",
+  icons: {
+    icon: {
+      url: '/favicon.ico',
+      sizes: '16x16',
+    },
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
